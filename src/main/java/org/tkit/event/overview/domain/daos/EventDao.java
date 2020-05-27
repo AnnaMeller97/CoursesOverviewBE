@@ -1,22 +1,24 @@
 package org.tkit.event.overview.domain.daos;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import org.tkit.event.overview.domain.models.Event;
 
 @ApplicationScoped
 public class EventDao {
 
-  private List<Event> eventList;
-
-  public EventDao() {
-    eventList = new ArrayList<>();
-    eventList.add(new Event(12, "Java", new Timestamp(15)));
-  }
+  @Inject
+  EntityManager manager;
 
   public List<Event> getAllEvents() {
-    return eventList;
+    TypedQuery<Event> query = manager.createQuery("SELECT e FROM Event e", Event.class);
+    return query.getResultList();
+  }
+
+  public void save(Event event) {
+    manager.persist(event);
   }
 }
