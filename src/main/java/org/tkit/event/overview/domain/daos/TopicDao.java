@@ -13,8 +13,10 @@ public class TopicDao {
   @Inject
   EntityManager manager;
 
-  public List<Topic> getAllTopics() {
-    TypedQuery<Topic> query = manager.createQuery("SELECT t FROM Topic t", Topic.class);
+  public List<Topic> getTopicsByCourseId(Integer id) {
+    TypedQuery<Topic> query = manager
+        .createQuery("SELECT t FROM Topic t WHERE t.courseId = :courseId", Topic.class);
+    query.setParameter("courseId", id);
     return query.getResultList();
   }
 

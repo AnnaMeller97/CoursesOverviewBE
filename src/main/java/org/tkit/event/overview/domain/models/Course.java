@@ -1,6 +1,6 @@
 package org.tkit.event.overview.domain.models;
 
-import java.sql.Timestamp;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,15 +17,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "event")
-public class Event {
+@Table(name = "course")
+public class Course {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
   private Integer id;
   @Column(name = "subject")
   private String subject;
-  @Column(name = "date")
-  private Timestamp date;
+  @Column(name = "price")
+  private BigDecimal price;
 
+  @Deprecated
+  public Course(String subject, BigDecimal price) {
+    this.subject = subject;
+    this.price = price;
+  }
 }

@@ -1,7 +1,5 @@
 package org.tkit.event.overview.domain.models;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,14 +23,17 @@ public class Topic {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
   private Integer id;
-  @Column(name = "event_id")
-  private Integer eventId;
+  @Column(name = "course_id")
+  private Integer courseId;
   @Column(name = "name")
   private String name;
-  @Column(name = "speaker")
-  private String speaker;
-  @Column(name = "start")
-  private Timestamp start;
-  @Column(name = "duration")
-  private Time duration;
+  @Column(name = "teacher")
+  private String teacher;
+
+  @Deprecated
+  public Topic(Integer courseId, String name, String teacher) {
+    this.courseId = courseId;
+    this.name = name;
+    this.teacher = teacher;
+  }
 }
