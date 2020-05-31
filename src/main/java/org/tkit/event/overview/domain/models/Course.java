@@ -28,10 +28,4 @@ public class Course {
   private String subject;
   @Column(name = "price")
   private BigDecimal price;
-
-  @Deprecated
-  public Course(String subject, BigDecimal price) {
-    this.subject = subject;
-    this.price = price;
-  }
 }

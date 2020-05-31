@@ -1,39 +1,37 @@
-package org.tkit.event.overview;
+package org.tkit.event.overview.rs.internal.controllers;
 
-import java.math.BigDecimal;
+import java.util.List;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.tkit.event.overview.domain.daos.CourseDao;
 import org.tkit.event.overview.domain.daos.TopicDao;
-import org.tkit.event.overview.domain.models.Course;
 import org.tkit.event.overview.domain.models.Topic;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("/")
-public class InitController {
-
-  @Inject
-  private CourseDao courseDao;
+@Path("/topic")
+public class TopicController {
 
   @Inject
   private TopicDao topicDao;
 
-  @GET
-  @Path("/init")
+  @POST
   @Transactional
-  @Deprecated
-  public Response init() {
-    Course course = new Course("Java", BigDecimal.valueOf(599.99));
-    Topic topic = new Topic(1, "Wstęp", "Jan Nowak");
-    courseDao.save(course);
+  public Response saveTopic(Topic topic) {
     topicDao.save(topic);
     return Response.noContent().build();
+  }
+
+  @GET
+  public List<Topic> getTopicsByCourseId(@QueryParam("courseId") Integer courseId) {
+    return topicDao.getTopicsByCourseId(courseId);
   }
 }

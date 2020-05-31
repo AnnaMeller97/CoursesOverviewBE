@@ -29,11 +29,4 @@ public class Topic {
   private String name;
   @Column(name = "teacher")
   private String teacher;
-
-  @Deprecated
-  public Topic(Integer courseId, String name, String teacher) {
-    this.courseId = courseId;
-    this.name = name;
-    this.teacher = teacher;
-  }
 }
