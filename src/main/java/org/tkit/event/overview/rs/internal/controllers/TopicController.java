@@ -17,7 +17,7 @@ import org.tkit.event.overview.domain.models.Topic;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("/topic")
+@Path("/")
 public class TopicController {
 
   @Inject
@@ -25,12 +25,14 @@ public class TopicController {
 
   @POST
   @Transactional
+  @Path("/topic")
   public Response saveTopic(Topic topic) {
     topicDao.save(topic);
     return Response.noContent().build();
   }
 
   @GET
+  @Path("/topics")
   public List<Topic> getTopicsByCourseId(@QueryParam("courseId") Integer courseId) {
     return topicDao.getTopicsByCourseId(courseId);
   }

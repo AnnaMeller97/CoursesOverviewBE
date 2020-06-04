@@ -15,19 +15,21 @@ import org.tkit.event.overview.domain.models.Course;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("/course")
+@Path("/")
 public class CourseController {
 
   @Inject
   private CourseDao courseDao;
 
   @GET
+  @Path("/courses")
   public List<Course> getAllCourses() {
     return courseDao.getAllCourses();
   }
 
   @POST
   @Transactional
+  @Path("/course")
   public Response saveCourse(Course course) {
     courseDao.save(course);
     return Response.noContent().build();
